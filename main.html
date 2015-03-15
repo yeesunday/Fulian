@@ -1,0 +1,131 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, user-scalable=no,maximum-scale=1.0,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+    <title>demo</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/preface.css"/>
+    <link rel="stylesheet" href="css/slider.css"/>
+</head>
+<body>
+<div class="wrapper">
+    <div class="menu">
+        <a class="menu-item" id="mPreface">前言</a>
+        <a class="menu-item" id="mCatalog">目录</a>
+        <a class="menu-item" id="mBook">书籍</a>
+    </div>
+    <div class="content">
+        <!--照片墙-->
+        <section class="panel" id="photoWallPanel">
+            <div align="center">
+                <p>
+                    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" name="3d_curve_wall" width="1000" height="700" align="middle" id="3d_curve_wall">
+                        <param name="allowScriptAccess" value="sameDomain" />
+                        <param name="movie" value="img/3d_curve_wall.swf" />
+                        <param name="quality" value="high" />
+                        <param name="bgcolor" value="#000000" />
+                        <embed src="img/3d_curve_wall.swf" quality="high" bgcolor="#000000" width="1000" height="700" name="3d_curve_wall" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                    </object>
+                </p>
+            </div>
+        </section>
+        <!--前言-->
+        <section class="panel" id="prefacePanel" style="height: 100%;">
+            <div id="screen">
+                <div id="box">
+                    <img src="img/preface/1.jpg" title="" alt="">
+                    <img src="img/preface/2.jpg" title="" alt="">
+                    <img src="img/preface/3.jpg" title="" alt="">
+                    <img src="img/preface/4.jpg" title="" alt="">
+                    <img src="img/preface/5.jpg" title="" alt="">
+                    <img src="img/preface/6.jpg" title="" alt="">
+                    <img src="img/preface/7.jpg" title="" alt="">
+                    <span id="txt"></span>
+                    <span id="tit"></span>
+                    <span id="lnk">
+                        <a href="/"></a>
+                        <a></a>
+                        <a></a>
+                        <a></a>
+                        <a></a>
+                        <a></a>
+                        <a></a>
+                    </span>
+                </div>
+            </div>
+            <span id="LB0" style="position:absolute;left:50%;top:50%;"><span style="position:absolute;font-family:arial;font-size:10px;color:#FFFFFF;left:-50px;top:-18px">Loading...</span>
+            <span style="position:absolute;left:-50px;top:-5px;font-size:1px;width:100px;height:10px;background:#333"><span id="LB1" style="position:absolute;left:0px;top:0px;font-size:1px;width:0px;height:10px;background:#FFFFFF"></span></span></span>
+        </section>
+        <!--展板-->
+        <section class="panel" id="boardPanel">
+            <div id="jswbox">
+                <pre class="prev">prev</pre>
+                <pre class="next">next</pre>
+                <!--demo演示总共20个模版，当前可看到的5个-->
+                <ul>
+                    <li><img src="img/panels/8.jpg" alt="bg8" /><span class="info">展板<i>19</i><span></li>
+                    <li><img src="img/panels/9.jpg" alt="bg9" /><span class="info">展板<i>20</i><span></li>
+                    <li><img src="img/panels/1.jpg" alt="bg1" /><span class="info">展板<i>1</i><span></li>
+                    <li><img src="img/panels/2.jpg" alt="bg2" /><span class="info">展板<i>2</i><span></li>
+                    <li><img src="img/panels/3.jpg" alt="bg3" /><span class="info">展板<i>3</i><span></li>
+                    <li><img src="img/panels/4.jpg" alt="bg4" /><span class="info">展板<i>4</i><span></li>
+                    <li><img src="img/panels/5.jpg" alt="bg5" /><span class="info">展板<i>5</i><span></li>
+                    <li><img src="img/panels/6.jpg" alt="bg6" /><span class="info">展板<i>6</i><span></li>
+                    <li><img src="img/panels/7.jpg" alt="bg7" /><span class="info">展板<i>7</i><span></li>
+                </ul>
+            </div>
+        </section>
+        <!--翻书-->
+        <section class="panel" id="bookPanel">
+            <div id="canvas">
+                <div id="book-zoom">
+                    <div class="flipbook">
+                        <div depth="5" class="hard"> <div class="side"></div> </div>
+                        <div depth="5" class="hard front-side"> <div class="depth"></div> </div>
+                        <div class="own-size"></div>
+                        <div class="own-size even"></div>
+                        <div class="hard fixed back-side p5"> <div class="depth"></div> </div>
+                        <div class="hard p6"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="js/lib/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript" src="js/ZoomPic.js"></script>
+<script type="text/javascript" src="js/preface.js"></script>
+<script type="text/javascript" src="js/book.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<!--<script type="text/javascript" src="js/book.js"></script>-->
+
+<script type="text/javascript">
+    $(function(){
+        new ZoomPic("jswbox");
+    })
+</script>
+
+</body>
+</html>
