@@ -1,5 +1,5 @@
 var i18n = {
-    ch: {
+    zh: {
         prefaceTitle: '前言',
         catalogTitle: '目录',
         bookTitle: '书籍'
