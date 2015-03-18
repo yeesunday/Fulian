@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/preface.css"/>
     <link rel="stylesheet" href="css/slider.css"/>
+    <link rel="stylesheet" href="css/bookshelf.css"/>
 </head>
 <body>
 <div class="wrapper">
@@ -94,6 +95,24 @@
         </section>
         <!--翻书-->
         <section class="panel" id="bookPanel">
+            <div class="bookshelf">
+                <div class="shelf">
+                    <div class="row-1">
+                        <div class="loc">
+                            <div> <div class="sample thumb1 book" book="1"></div> </div>
+                            <div> <div class="sample thumb2 book" book="2"></div> </div>
+                            <div> <div class="sample thumb3 book" book="3"></div> </div>
+                        </div>
+                    </div>
+                    <div class="row-2">
+                        <div class="loc">
+                            <div> <div class="sample thumb4 book" book="4"></div> </div>
+                            <div> <div class="sample thumb5 book" book="5"></div> </div>
+                            <div> <div class="sample thumb6 book" book="6"></div> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="canvas">
                 <div id="book-zoom">
                     <div class="flipbook">
@@ -113,12 +132,14 @@
 <script type="text/javascript" src="js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="js/lib/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript" src="js/lib/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.easing.js"></script>
 <script type="text/javascript" src="js/base.js"></script>
 <script type="text/javascript" src="js/i18n.js"></script>
 
 <script type="text/javascript" src="js/ZoomPic.js"></script>
 <script type="text/javascript" src="js/preface.js"></script>
-<script type="text/javascript" src="js/book.js"></script>
+<script type="text/javascript" src="js/bookshelf.js"></script>
+<!--<script type="text/javascript" src="js/book.js"></script>-->
 <script type="text/javascript" src="js/main.js"></script>
 
 <!--<script type="text/javascript" src="js/book.js"></script>-->

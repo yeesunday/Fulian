@@ -25,13 +25,13 @@ body, ul, table, form{
     margin: 50px 0 50px 100px;
 }
 
-#book-zoom{
-    -webkit-transition: -webkit-transform 1s;
-    -moz-transition: -moz-transform 1s;
-    -ms-transition: -ms-transform 1s;
-    -o-transition: -o-transform 1s;
-    transition: transform 1s;
-}
+/*#book-zoom{*/
+    /*-webkit-transition: -webkit-transform 1s;*/
+    /*-moz-transition: -moz-transform 1s;*/
+    /*-ms-transition: -ms-transform 1s;*/
+    /*-o-transition: -o-transform 1s;*/
+    /*transition: transform 1s;*/
+/*}*/
 
 .flipbook{
     width:960px;
@@ -371,6 +371,12 @@ body, ul, table, form{
     background-repeat:repeat-y;
 }
 
+#book-zoom {
+    visibility: hidden;
+}
+.flipbook {
+    z-index: 100;
+}
 .page .cover-f,
 .page .cover-b{
     width: 100%;
