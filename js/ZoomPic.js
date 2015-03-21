@@ -10,7 +10,7 @@ ZoomPic.prototype =
         var str="";
         this.wrap = typeof id === "string" ? document.getElementById(id) : id;
         for(var j=0;j<childcount;j++){
-            str+="<li data-index=\""+j+"\"><div class=\"vessel\" ></div></li>";
+            str+="<li data-index=\""+j+"\"><img /></li>";
         }
         $(this.wrap).find("ul").html(str);
         this.oUl = this.wrap.getElementsByTagName("ul")[0];
@@ -68,6 +68,9 @@ ZoomPic.prototype =
         {
             this.aSort[i].onclick = function ()
             {
+                if($(this).data("scaleflag")){
+                    $(this).data("scaleflag",false);
+                }
                 if (this.index > _this.iCenter)
                 {
                     for (var i = 0; i < this.index - _this.iCenter; i++) _this.aSort.push(_this.aSort.shift());
@@ -80,30 +83,34 @@ ZoomPic.prototype =
                 }
             }
         }
-        $(this.wrap).on("mouseenter","li[data-index]",function(){
-            if(this.timer){
+        $(this.wrap).on("mouseenter","li[data-index] img",function(){
+            var parent=$(this).parent("li");
+            parent.data("scaleflag",true);
+            console.log(parent.data("index")+"enter");
+            if(parent[0].timer){
                 return;
             }
-            var cur={
-                width: $(this).css("width"),
-                height: $(this).css("height"),
-                left:$(this).css("left"),
-                top:$(this).css("top")
-            };
-            $(this).data("original",cur);
-            $(this).css("width",parseInt(cur.width)*1.08+"px");
-            $(this).css("height",parseInt(cur.height)*1.08+"px");
-            $(this).css({"width":parseInt(cur.width)*1.08+"px","height":parseInt(cur.height)*1.08+"px",left:parseInt(cur.left)-parseInt(cur.width)*0.04,top:parseInt(cur.top)-parseInt(cur.height)*0.04});
+            $(this).stop().animate({
+                "width":parent.width()*1.08,
+                "height":parent.height()*1.08,
+                "margin-top":-parent.height()*0.04
+            },250);
         });
-        $(this.wrap).on("mouseleave","li[data-index]",function(){
-            if(this.timer){
+        $(this.wrap).on("mouseleave","li[data-index] img",function(){
+            var parent=$(this).parent("li");
+            if(parent.data("scaleflag")){
+                parent.data("scaleflag",false);
+            }else{
                 return;
             }
-            var org=$(this).data("original");
-            if(org){
-                $(this).css({"width":org.width,"height":org.height,"left":org.left,"top":org.top });
-                $(this).data("original",null);
+            console.log(parent.data("index")+"leave");
+            if(parent[0].timer){
+                return;
             }
+            $(this).stop().animate({"width":parent.width(),"height":parent.height(), "margin-top":0},250,function(){
+                $(this).attr("style","");
+            });
+            //$(this).animate({"width":"100%","height":"100%" },250);
         });
     },
     setUp : function ()
@@ -118,39 +125,29 @@ ZoomPic.prototype =
             {
                 this.css(this.aSort[i], "display", "block");
                 var index= $(this.aSort[i]).data("index");
-                if($(this.aSort[i]).find(".vessel").children().size()==0){
-                    $(this.aSort[i]).find(".vessel").addClass("loading").load("src/zh/ppt/"+(index+1)+".html",null,function(response,status,xhr){
-                        switch (status){
-                            case "error":
-                            case "timeout":
-                            case "parsererror":
-                                break;
-                            default :
-                                $(this).removeClass("loading");
-                                break
-                        }
-                    });
+                var image=$(this.aSort[i]).find("img")[0];
+                if(!image.src){
+                    $(this.aSort[i]).addClass(".loading");
+                    image.onload=function(){
+                        $(this).closest(".loading").removeClass(".loading");
+                    };
+                    image.src="src/zh/ppt/幻灯片"+(index+1)+".JPG";
                 }
-
-                var org=$(this.aSort[i]).data("original");
-                if(org){
-                    $(this.aSort[i]).css({"width":org.width,"height":org.height,"left":org.left,"top":org.top });
-                    $(this.aSort[i]).data("original",null);
-                }
+                $(this.aSort[i]).find("img").stop().removeAttr("style");
                 this.doMove(this.aSort[i], this.options[i], function ()
                 {
-                    _this.doMove($(_this.aSort[_this.iCenter]).find(".vessel")[0], {opacity:100}, function ()
+                    _this.doMove($(_this.aSort[_this.iCenter]).find("img")[0], {opacity:100}, function ()
                     {
-                        _this.doMove($(_this.aSort[_this.iCenter]).find(".vessel")[0], {opacity:100}, function ()
+                        _this.doMove($(_this.aSort[_this.iCenter]).find("img")[0], {opacity:100}, function ()
                         {
-                            _this.aSort[_this.iCenter].onmouseover = function ()
+                           /* _this.aSort[_this.iCenter].onmouseover = function ()
                             {
                                 _this.doMove(this.getElementsByTagName("div")[0], {bottom:0})
                             };
                             _this.aSort[_this.iCenter].onmouseout = function ()
                             {
                                 _this.doMove(this.getElementsByTagName("div")[0], {bottom:-100})
-                            }
+                            }*/
                         })
                     })
                 });
@@ -165,14 +162,14 @@ ZoomPic.prototype =
             }
             if (i < this.iCenter || i > this.iCenter)
             {
-                this.css($(this.aSort[i]).find(".vessel")[0], "opacity", 100);
+                this.css($(this.aSort[i]).find("img")[0], "opacity", 100);
                 this.aSort[i].onmouseover = function ()
                 {
-                    _this.doMove($(this).find(".vessel")[0], {opacity:100})
+                    _this.doMove($(this).find("img")[0], {opacity:100})
                 };
                 this.aSort[i].onmouseout = function ()
                 {
-                    _this.doMove($(this).find(".vessel")[0], {opacity:100})
+                    _this.doMove($(this).find("img")[0], {opacity:100})
                 };
                 this.aSort[i].onmouseout();
             }

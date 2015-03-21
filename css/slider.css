@@ -4,11 +4,11 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "ÐÂËÎÌå";}
 
 /* jswbox */
 #Index_Box{width:1050px;height:600px;  margin:50px 0 0px 19px;position:relative;}
-#Index_Box ul{position:relative;height:600px;}
-#Index_Box li{position:absolute;width:0;height:0;z-index:0;cursor:pointer;overflow:hidden;top:152px;left:10px;}
-#Index_Box li .vessel{width:100%;height:100%;vertical-align:top;float:left;}
-#Index_Box li .loading{
-    background:url(../img/loader.gif) center rgba(0,0,0,80) no-repeat;
+#Index_Box ul{position:relative;height:600px;overflow:visible;}
+#Index_Box li{position:absolute;width:0;height:0;z-index:0;cursor:pointer;overflow:visible;top:152px;left:10px;text-align: center; }
+#Index_Box li img{width:100%;height:100%;vertical-align:top;float:left;}
+#Index_Box li.loading{
+    background:url(../img/loader.gif) center  no-repeat;
 }
 #Index_Box .prev, #Index_Box .next{display:none;}
 .con{
