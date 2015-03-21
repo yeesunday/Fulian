@@ -3,9 +3,19 @@ a,img{border:0;}
 body{font:12px/180% Arial, Helvetica, sans-serif, "ÐÂËÎÌå";}
 
 /* jswbox */
-#jswbox{width:1100px;height:600px;margin:0 auto;position:relative;}
-#jswbox ul{position:relative;height:600px;}
-#jswbox li{position:absolute;width:0;height:0;z-index:0;cursor:pointer;overflow:hidden;top:152px;left:10px;}
-#jswbox li img{width:100%;height:100%;vertical-align:top;}
-#jswbox .prev, #jswbox .next{display:none;}
-.info{position:absolute;left:20px;top:20px;font-size:14px;color:#f00;display:block;background:#0f0;}
+#Index_Box{width:1050px;height:600px;  margin:50px 0 0px 19px;position:relative;}
+#Index_Box ul{position:relative;height:600px;}
+#Index_Box li{position:absolute;width:0;height:0;z-index:0;cursor:pointer;overflow:hidden;top:152px;left:10px;}
+#Index_Box li .vessel{width:100%;height:100%;vertical-align:top;float:left;}
+#Index_Box li .loading{
+    background:url(../img/loader.gif) center rgba(0,0,0,80) no-repeat;
+}
+#Index_Box .prev, #Index_Box .next{display:none;}
+.con{
+    font-size: 50px;
+    text-align: center;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+}
