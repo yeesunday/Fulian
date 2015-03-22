@@ -15,6 +15,10 @@ $('#mPreface').click(function () {
 });
 $('#mCatalog').click(function () {
     showPanel('boardPanel');
+    $(".zpmenu").show().width(0).animate({
+        width:958
+        },500,function(){
+    });
 });
 $('#mBook').click(function () {
     showPanel('bookPanel');

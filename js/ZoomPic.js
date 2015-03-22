@@ -202,14 +202,14 @@ ZoomPic.prototype =
                     {
                         _this.doMove($(goIngVisibleItems[_this.iCenter]).find("img")[0], {opacity:1}, function ()
                         {
-                            /* _this.aSort[_this.iCenter].onmouseover = function ()
+                             _this.aSort[_this.iCenter].onmouseover = function ()
                              {
                              _this.doMove(this.getElementsByTagName("div")[0], {bottom:0})
                              };
                              _this.aSort[_this.iCenter].onmouseout = function ()
                              {
                              _this.doMove(this.getElementsByTagName("div")[0], {bottom:-100})
-                             }*/
+                             }
                         })
                     })
                 });
@@ -299,10 +299,6 @@ ZoomPic.prototype =
             }
         }, 30)
     }
-};
-window.onload = function ()
-{
-    zoomPic= new ZoomPic("Index_Box",15);
 };
 function ThumbnailsList(itemnumber,totalNumber){
     this.totalCount=totalNumber;
@@ -420,5 +416,18 @@ ThumbnailsList.prototype={
     }
 };
 $(function(){
-    window.zoomPic=new ZoomPic("Index_Box",226);
+    window.zoomPic = new ZoomPic("Index_Box",226);
+    window.slider2=new accordion.Slider("slider2");
+    window.slider2.init("slider2",0,"open");
+    $(".zpmenu li").on("click",function(){
+       var pageNum =$(this).attr("page");
+        if(pageNum){
+            window.zoomPic.goPage(parseInt(pageNum));
+            $(".zpmenu").animate({
+                width:0
+            },500,function(){
+                $(this).hide();
+            });
+        }
+    });
 });

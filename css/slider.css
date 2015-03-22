@@ -1,8 +1,5 @@
-*{margin:0;padding:0;list-style-type:none;}
-a,img{border:0;}
-/*body{font:12px/180% Arial, Helvetica, sans-serif, "ÐÂËÎÌå";}*/
 
-/* jswbox */
+/* Index_Box */
 #Index_Box{width:1050px;height:600px;  margin:15px 0 0px 19px;position:relative;}
 #Index_Box ul{position:relative;height:600px;overflow:visible;}
 #Index_Box li{position:absolute;width:0;height:0;z-index:0;cursor:pointer;overflow:visible;top:152px;left:10px;text-align: center; }
