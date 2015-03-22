@@ -1,6 +1,6 @@
 
 document.onselectstart = new Function("return false");
-O    = new Array();
+O    = [];
 box  = 0;
 img  = 0;
 txt  = 0;

@@ -184,7 +184,7 @@ ZoomPic.prototype =
                 this.css(goIngVisibleItems[i], "display", "block");
                 var index= this.data[i].pageIndex;
                 var image=$(goIngVisibleItems[i]).find("img")[0];
-                var src=decodeURI("src/zh/ppt/幻灯片"+(index+1)+".JPG");
+                var src=decodeURIComponent("src/zh/ppt/幻灯片"+(index+1)+".JPG");
                 if(!image.src||image.src.indexOf(src)){
                     $(goIngVisibleItems[i]).addClass(".loading");
                     image.onload=function(){
