@@ -3,7 +3,7 @@ BOOKID = 1; //正在阅读的书籍 ID
 $FILPBOOK = $('.flipbook'); //翻书插件绑定对象
 
 
-var wh = window.innerHeight;
+var wh = $(window).height();
 $('.loading-page img').css('margin-top', (wh - 397) / 2);
 
 $('#mPreface').html(i18n[LANG].prefaceTitle);
