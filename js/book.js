@@ -28,9 +28,6 @@ function loadApp() {
         }
 
     });
-
-
-    initView();
 }
 /*
  * 通用方法
