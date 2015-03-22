@@ -39,7 +39,7 @@
 <script type="text/javascript" src="js/lib/jquery.min.js"></script>
 <script>
     var wh = window.innerHeight;
-    $('.title').css({padding: ((wh - 100 - $('.title').height()) / 2 - 100) + 'px 0 0'});
+    $('.title')[0].style.padding = (wh - 100 - $('.title').height()) / 2 - 100 + 'px 0 0 0';
 </script>
 <script>
 

@@ -1,20 +1,25 @@
+//"use strict";
 
 document.onselectstart = new Function("return false");
-O    = [];
-box  = 0;
-img  = 0;
-txt  = 0;
-tit  = 0;
-W    = 0;
-H    = 0;
-nI   = 0;
-sel  = 0;
-si   = 0;
-ZOOM = 0;
-rImg = 0;
-//////////////////
-speed = .06; // animation speed
-delay = .5; // 1 = no delay
+var O    = [];
+var box  = 0;
+var img  = 0;
+var txt  = 0;
+var tit  = 0;
+var W    = 0;
+var H    = 0;
+var nI   = 0;
+var sel  = 0;
+var si   = 0;
+var ZOOM = 0;
+var rImg = 0;
+var speed = .06; // animation speed
+var delay = .5; // 1 = no delay
+var l;
+var vz;
+var zo;
+var w;
+
 //////////////////
 
 function dText(){
