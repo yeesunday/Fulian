@@ -398,5 +398,9 @@ ThumbnailsList.prototype={
                 $(this).parent("li").removeClass("loading");
             };
         }
+
+
+
+
     }
 };
