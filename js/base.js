@@ -2,8 +2,11 @@ resize();
 $(window).resize(resize);
 function resize() {
     $('.wrapper').css('top',
-        (window.innerHeight - $('.wrapper').height()) / 2);
+        ($(window).height() - $('.wrapper').height()) / 2);
 }
+
+var wh = $(window).height();
+$('.loading-page img').css('margin-top', (wh - 397) / 2);
 
 var LANG = getUrlParameter('lang') || 'zh'; //语言设置
 function getUrlParameter (sParam) {

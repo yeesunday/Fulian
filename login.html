@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="wrapper-lg">
-    <h1 class="title">新世纪中国妇女 / 性别研究成果展</h1>
+    <div class="title"><h1>新世纪中国妇女 / 性别研究成果展</h1></div>
     <div class="footer">
         <div class="language-choose">
             <a href="main.html?lang=zh">中文版</a> | <a href="main.html?lang=en">English</a>
@@ -38,8 +38,10 @@
 
 <script type="text/javascript" src="js/lib/jquery.min.js"></script>
 <script>
-    var wh = window.innerHeight;
-    $('.title').css('padding-top', (wh - 100 - $('.title').height()) / 2 - 100);
+    var wh = $(window).height();
+    $('.title').css({
+        top: ((wh - 100 - $('.title').height()) / 2 - 100) + 'px'}
+    );
 </script>
 <script>
 

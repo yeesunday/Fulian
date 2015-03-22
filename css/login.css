@@ -6,12 +6,16 @@
 .title {
     width: 100%;
     text-align: center;
-    padding-top: 100px;
+    /*padding-top: 200px;*/
     color: #FFFFFF;
+    position: absolute;
+    top: 300px;
+    left: 0px;
 }
 .footer {
     position: absolute;
     bottom: 0px;
+    left: 0px;
     height: 100px;
     background: #575756;
     color: #FFFFFF;
@@ -23,7 +27,7 @@
 .language-choose {
     margin-left: 10%;
     float: left;
-    font-size: 40px;
+    font-size: 30px;
     line-height: 100px;
 }
 .co-info {

@@ -59,7 +59,7 @@
     position: absolute;
 }
 #photoWallPanel {
-    /*display: block;*/
+    display: none;
     /*width: 700px;*/
     height: 100%;
     /*top: 10%;*/
