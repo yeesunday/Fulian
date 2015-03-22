@@ -8,6 +8,7 @@
     text-align: center;
     padding-top: 100px;
     color: #FFFFFF;
+    position: relative;
 }
 .footer {
     position: absolute;
