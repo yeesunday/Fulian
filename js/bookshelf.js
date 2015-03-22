@@ -18,119 +18,138 @@
     bookshelf = {
 
         show: function() {
-            $FILPBOOK.turn({
-                width: 920,
-                height: 582,
-                elevation: 50,
-                //acceleration: !isChrome(),
-                autoCenter: true,
-                gradients: true,
-                duration: 1000,
-                pages: 6,
-                when: {
-                    missing: function (e, pages) {
-                        for (var i = 0; i < pages.length; i++) {
-                            addPage(pages[i], $(this));
-                        }
-
-                    }
-                }
-
-            });
             if (Modernizr.csstransforms) {
                 var thumbnail = $('.shelf .book[book="' + currentBook + '"]');
                 var scaleFrom = thumbnail.height() / $('#book-zoom').height();
                 $('#book-zoom').
-                    css({visibility:'hidden'}).
                     removeClass('animate').
                     transform('scale(' + scaleFrom + ',' + scaleFrom + ')');
                 $('.bookshelf').fadeOut(500);
+                $('#book-zoom').show();
+                $FILPBOOK.turn('page', 2);
                 $('#book-zoom').
                     addClass('animate').
-                    transform('scale(' + 1 + ',' + 1 + ')').
-                    css({visibility:'visible'});
+                    transform('scale(' + 1 + ',' + 1 + ')');
             } else {
                 $FILPBOOK.turn('page', 2);
             }
-
+            $('.btn-book-close').show();
         },
 
         close: function() {
             if (Modernizr.csstransforms) {
                 var thumbnail = $('.shelf .book[book="' + currentBook + '"]');
                 var scaleFrom = thumbnail.height() / $('#book-zoom').height();
-                $('#book-zoom').
-                    css({visibility:'hidden'}).
-                    removeClass('animate').
-                    transform('scale(' + scaleFrom + ',' + scaleFrom + ')');
-                $('.bookshelf').fadeOut(500);
+                $('.bookshelf').fadeIn(500);
                 $('#book-zoom').
                     addClass('animate').
-                    transform('scale(' + 1 + ',' + 1 + ')').
-                    css({visibility:'visible'});
+                    transform('scale(' + scaleFrom + ',' + scaleFrom + ')');
+                $('#book-zoom').fadeOut(500);
+                $FILPBOOK.turn('page', 1);
             } else {
-                $FILPBOOK.turn('page', 2);
+                $FILPBOOK.css({visibility:'hidden'});
+                $FILPBOOK.turn('page', 1);
+                $('.bookshelf').fadeIn(500);
             }
-
-            if (Modernizr.csstransforms) {
-
-                thumbnail.removeClass('hover');
-                $('.splash').removeClass('no-transition');
-                $('.bookshelf').addClass('no-transition no-transform');
-                $('.splash').removeClass('show-bar');
-
-                sample.flipbook.turn('page', 1);
-
-                var bookWidth = $('#book-zoom').width()/2,
-                    bookHeight = $('#book-zoom').height()/2,
-                    targetPosition = thumbnail.offset(),
-                    position = $('#book-zoom').offset(),
-                    scaleFrom = $('#book-zoom').height() / thumbnail.height(),
-                    posX = (-bookWidth + sample.flipbook.width()/4)*scaleFrom +  bookWidth + position.left,
-                    posY = -bookHeight*scaleFrom +  bookHeight + position.top,
-                    moveX = targetPosition.left - posX,
-                    moveY = targetPosition.top - posY;
-
-                $('.bookshelf').removeClass('no-transform');
-
-                setTimeout(function(){
-                    $('.bookshelf').removeClass('no-transition');
-                    $('.splash').removeClass('preview');
-                    $('#book-zoom').
-                        addClass('animate').
-                        transform('translate(' + moveX + 'px, ' + moveY + 'px) ' +
-                        'scale3d(' + scaleFrom + ',' + scaleFrom + ',1)');
-                }, 0);
-
-                setTimeout(function(){
-                    if (!currentDemo) {
-                        $('.splash').removeClass('show-samples sample-'+smpl);
-                        thumbnail.css({visibility: 'visible'});
-                    }
-                }, 1000);
-
-            } else {
-                $('.splash').removeClass('preview show-samples show-bar sample-'+smpl);
-            }
+            $('.btn-book-close').hide();
+            //if (Modernizr.csstransforms) {
+            //
+            //    thumbnail.removeClass('hover');
+            //    $('.splash').removeClass('no-transition');
+            //    $('.bookshelf').addClass('no-transition no-transform');
+            //    $('.splash').removeClass('show-bar');
+            //
+            //    sample.flipbook.turn('page', 1);
+            //
+            //    var bookWidth = $('#book-zoom').width()/2,
+            //        bookHeight = $('#book-zoom').height()/2,
+            //        targetPosition = thumbnail.offset(),
+            //        position = $('#book-zoom').offset(),
+            //        scaleFrom = $('#book-zoom').height() / thumbnail.height(),
+            //        posX = (-bookWidth + sample.flipbook.width()/4)*scaleFrom +  bookWidth + position.left,
+            //        posY = -bookHeight*scaleFrom +  bookHeight + position.top,
+            //        moveX = targetPosition.left - posX,
+            //        moveY = targetPosition.top - posY;
+            //
+            //    $('.bookshelf').removeClass('no-transform');
+            //
+            //    setTimeout(function(){
+            //        $('.bookshelf').removeClass('no-transition');
+            //        $('.splash').removeClass('preview');
+            //        $('#book-zoom').
+            //            addClass('animate').
+            //            transform('translate(' + moveX + 'px, ' + moveY + 'px) ' +
+            //            'scale3d(' + scaleFrom + ',' + scaleFrom + ',1)');
+            //    }, 0);
+            //
+            //    setTimeout(function(){
+            //        if (!currentDemo) {
+            //            $('.splash').removeClass('show-samples sample-'+smpl);
+            //            thumbnail.css({visibility: 'visible'});
+            //        }
+            //    }, 1000);
+            //
+            //} else {
+            //    $('.splash').removeClass('preview show-samples show-bar sample-'+smpl);
+            //}
 
         },
         open: function (id) {
             currentBook = id;
             if (lastBook != -1) {
                 if (lastBook != currentBook) {
-                    $FLIPBOOK.turn('destroy').remove();
+                    $FILPBOOK.turn('destroy').remove();
                     $FILPBOOK = null;
                     $('#book-zoom').html('<div class="flipbook"></div>');
                     $FILPBOOK = $('.flipbook');
                     lastBook = currentBook;
                     BOOKID = currentBook;
-                    bookshelf.show(id);
+                    $FILPBOOK.turn({
+                        width: 920,
+                        height: 582,
+                        elevation: 50,
+                        //acceleration: !isChrome(),
+                        autoCenter: true,
+                        gradients: true,
+                        duration: 1000,
+                        pages: 6,
+                        when: {
+                            missing: function (e, pages) {
+                                for (var i = 0; i < pages.length; i++) {
+                                    addPage(pages[i], $(this));
+                                }
+
+                            }
+                        }
+
+                    });
+                    bookshelf.show();
                 } else {
-                    $('#book-zoom').show();
+                    bookshelf.show();
                 }
             } else {
                 console.log('open', id);
                 BOOKID = id;
+                lastBook = currentBook = BOOKID;
+                $FILPBOOK.turn({
+                    width: 920,
+                    height: 582,
+                    elevation: 50,
+                    //acceleration: !isChrome(),
+                    autoCenter: true,
+                    gradients: true,
+                    duration: 1000,
+                    pages: 6,
+                    when: {
+                        missing: function (e, pages) {
+                            for (var i = 0; i < pages.length; i++) {
+                                addPage(pages[i], $(this));
+                            }
+
+                        }
+                    }
+
+                });
                 bookshelf.show();
             }
         }
@@ -170,6 +189,9 @@
     $('.book').click(function(e){
         var id = $(e.target).attr('book');
         bookshelf.open(id);
+    });
+    $('.btn-book-close').click(function () {
+        bookshelf.close();
     });
 })(jQuery);
 

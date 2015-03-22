@@ -57,17 +57,6 @@
     -o-transition:-o-transform 1s;
     transition:transform 1s;
 }
-.bookshelf{
-    float:right;
-    margin-top:140px;
-}
-
-.bookshelf .shelf{
-    /*background:url(../pics/bookshelf.gif);
-    background-size:100%;*/
-    width:426px;
-    height:440px;
-}
 
 .bookshelf .shelf .row-1{
     position:relative;
@@ -78,7 +67,8 @@
 }
 
 .bookshelf .shelf .row-1:after,
-.bookshelf .shelf .row-2:after{
+.bookshelf .shelf .row-2:after,
+.bookshelf .shelf .row-3:after{
     background:url(../img/bookshelf/wall-bookshelf.png);
     background-size:100%;
     background-repeat: no-repeat;
@@ -101,7 +91,13 @@
 .bookshelf .shelf .row-2:after{
     height:216px;
 }
-
+.bookshelf .shelf .row-3{
+    position:relative;
+    margin-top:20px;
+    height:164px;
+    width:360px;
+    margin-left:33px;
+}
 .bookshelf .shelf .loc{
     position:absolute;
     bottom:0;
@@ -214,7 +210,20 @@
     background-image:url(../img/bookshelf/book6.jpg);
 }
 
-.bookshelf .book {
+.bookshelf .thumb7,
+.bookshelf-row .thumb7{
+    background-image:url(../img/bookshelf/book7.jpg);
+}
+.bookshelf .thumb8,
+.bookshelf-row .thumb8{
+    background-image:url(../img/bookshelf/book8.jpg);
+}
+.bookshelf .thumb9,
+.bookshelf-row .thumb9{
+    background-image:url(../img/bookshelf/book9.jpg);
+}
+
+.bookshelf .sample {
     width:92px;
     height:115px;
 }
@@ -223,4 +232,44 @@
 }
 .show-book.bookshelf{
     display:none;
+}
+.btn-book-close {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: #333;
+    width: 22px;
+    height: 22px;
+    display: none;
+}
+.bookshelf{
+    float:left;
+    margin-top: 60px;
+}
+.bookshelf .shelf{
+    /*background:url(../pics/bookshelf.gif);
+    background-size:100%;*/
+    width:426px;
+    /*height:440px;*/
+    float: left;
+}
+.bookshelf .book-catalog {
+    float: left;
+    width: 600px;
+    height: 500px;
+    background: #D3D9E5;
+    margin-top: 37px;
+}
+.bc-title {
+    text-align: center;
+    font-size: 26px;
+    margin: 20px auto;
+}
+.bc-item {
+    width: 190px;
+    text-align: center;
+    height: 65px;
+    float: left;
+    font-size: 18px;
 }

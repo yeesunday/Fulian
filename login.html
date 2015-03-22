@@ -23,16 +23,24 @@
     <link rel="stylesheet" href="css/login.css"/>
 </head>
 <body>
-<div class="wrapper">
-    <h1 class="title">新世纪中国妇女/性别研究成果展</h1>
-    <div class="language-choose">
-        <a href="main.html?lang=zh">中文版</a>
-        <a href="main.html?lang=en">English</a>
+<div class="wrapper-lg">
+    <h1 class="title">新世纪中国妇女 / 性别研究成果展</h1>
+    <div class="footer">
+        <div class="language-choose">
+            <a href="main.html?lang=zh">中文版</a> | <a href="main.html?lang=en">English</a>
+        </div>
+        <div class="co-info">
+            <div>主办单位：中国妇女研究会 妇女研究所</div>
+            <div>技术支持：创投网络</div>
+        </div>
     </div>
 </div>
 
 <script type="text/javascript" src="js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="js/base.js"></script>
+<script>
+    var wh = window.innerHeight;
+    $('.title').css('padding-top', (wh - 100 - $('.title').height()) / 2 - 100);
+</script>
 <script>
 
 </script>

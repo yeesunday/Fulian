@@ -136,6 +136,7 @@ onload = function(){
     }
     box.style.visibility = "visible";
     run();
+    initView();
 }
 
 m00=document.getElementById("box").getElementsByTagName("img");

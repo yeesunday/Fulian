@@ -1,10 +1,33 @@
+.wrapper-lg {
+    width: 100%;
+    max-width: 1900px;
+    margin: 0 auto;
+}
 .title {
     width: 100%;
     text-align: center;
     padding-top: 100px;
+    color: #FFFFFF;
+}
+.footer {
+    position: absolute;
+    bottom: 0px;
+    height: 100px;
+    background: #575756;
+    color: #FFFFFF;
+    width: 100%;
+}
+.language-choose a {
+    color: #FFFFFF;
 }
 .language-choose {
-    width: 100%;
-    text-align: center;
-    margin-top: 100px;
+    margin-left: 10%;
+    float: left;
+    font-size: 40px;
+    line-height: 100px;
+}
+.co-info {
+    float: right;
+    margin-right: 5%;
+    margin-top: 15px;
 }

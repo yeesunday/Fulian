@@ -372,7 +372,8 @@ body, ul, table, form{
 }
 
 #book-zoom {
-    visibility: hidden;
+    /*visibility: hidden;*/
+    display: none;
 }
 .flipbook {
     z-index: 100;

@@ -18,18 +18,20 @@
 .menu {
     position: absolute;
     left: 0px;
-    top: 50px;
+    top: 143px;
     width: 80px;
     height: 412px;
-    background: rgba(255, 255, 255, 0.8);
+    /*background: rgba(255, 255, 255, 0.8);*/
 }
 .menu-item {
     position: absolute;
     left: 0px;
     min-width: 60px;
     line-height: 30px;
-    background: #c0000b;
-    color: #ffffff;
+    font-family: SimHei;
+    cursor: pointer;
+    /*background: #c0000b;*/
+    /*color: #ffffff;*/
 }
 #mPreface {
     top: 100px;
