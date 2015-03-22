@@ -129,7 +129,6 @@
                     bookshelf.show();
                 }
             } else {
-                console.log('open', id);
                 BOOKID = id;
                 lastBook = currentBook = BOOKID;
                 $FILPBOOK.turn({

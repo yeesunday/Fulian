@@ -61,29 +61,24 @@
 .bookshelf .shelf .row-1{
     position:relative;
     width:360px;
-    height:158px;
+    height:160px;
     margin-left:33px;
-
 }
 
-.bookshelf .shelf .row-1:after,
-.bookshelf .shelf .row-2:after,
-.bookshelf .shelf .row-3:after{
-    background:url(../img/bookshelf/wall-bookshelf.png);
-    background-size:100%;
-    background-repeat: no-repeat;
-    background-position:bottom left;
+.row-bottom{
+    background:url(../img/bookshelf/wall-bookshelf.png) no-repeat;
     width:426px;
-    height:210px;
+    height:65px;
     display:block;
-    content:"";
-    margin-left:-38px;
+    margin-left: -38px;
+    top: 148px;
+    position: absolute;
 }
 
 .bookshelf .shelf .row-2{
     position:relative;
     margin-top:20px;
-    height:164px;
+    height:160px;
     width:360px;
     margin-left:33px;
 }
@@ -94,7 +89,7 @@
 .bookshelf .shelf .row-3{
     position:relative;
     margin-top:20px;
-    height:164px;
+    height:160px;
     width:360px;
     margin-left:33px;
 }

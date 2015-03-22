@@ -19,7 +19,7 @@ function loadApp() {
         pages: 6,
         when: {
             missing: function (e, pages) {
-                console.log(0);
+                //console.log(0);
                 for (var i = 0; i < pages.length; i++) {
                     addPage(pages[i], $(this));
                 }
