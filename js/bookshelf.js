@@ -31,6 +31,7 @@
                     addClass('animate').
                     transform('scale(' + 1 + ',' + 1 + ')');
             } else {
+                $('#book-zoom').show();
                 $FILPBOOK.turn('page', 2);
             }
             $('.btn-book-close').show();
@@ -47,8 +48,8 @@
                 $('#book-zoom').fadeOut(500);
                 $FILPBOOK.turn('page', 1);
             } else {
-                $FILPBOOK.css({visibility:'hidden'});
                 $FILPBOOK.turn('page', 1);
+                $('#book-zoom').hide();
                 $('.bookshelf').fadeIn(500);
             }
             $('.btn-book-close').hide();
@@ -128,7 +129,6 @@
                     bookshelf.show();
                 }
             } else {
-                console.log('open', id);
                 BOOKID = id;
                 lastBook = currentBook = BOOKID;
                 $FILPBOOK.turn({
