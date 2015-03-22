@@ -6,9 +6,11 @@
 .title {
     width: 100%;
     text-align: center;
-    padding-top: 200px;
+    /*padding-top: 200px;*/
     color: #FFFFFF;
-    position: relative;
+    position: absolute;
+    top: 200px;
+    left: 0px;
 }
 .footer {
     position: absolute;
