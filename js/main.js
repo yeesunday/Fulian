@@ -55,6 +55,7 @@ function initView () {
 
                 //当一张图片加载完成时执行
                 _imgList[i].onload = function () {
+                    //console.log(loadedCount);
                     //当所有图片加载完成时，执行回调函数callback
                     if (++loadedCount >= totalCount) {
                         callback && callback();
