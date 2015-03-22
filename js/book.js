@@ -64,10 +64,11 @@ function addPage(page, book) {
 
 // Load the HTML4 version if there's not CSS transform
 
-//yepnope({
-//    test : Modernizr.csstransforms,
-//    yep: ['js/lib/turn.min.js'],
-//    nope: ['js/lib/turn.html4.min.js', 'css/jquery.ui.html4.css', 'css/book-html4.css'],
-//    both: ['css/jquery.ui.css', 'css/book.css'],
-//    complete: loadApp
-//});
+/*
+yepnope({
+    test : Modernizr.csstransforms,
+    yep: ['js/lib/turn.min.js'],
+    nope: ['js/lib/turn.html4.min.js', 'css/jquery.ui.html4.css', 'css/book-html4.css'],
+    both: ['css/jquery.ui.css', 'css/book.css'],
+    complete: loadApp
+});*/

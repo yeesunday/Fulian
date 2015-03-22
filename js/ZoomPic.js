@@ -13,14 +13,21 @@ ZoomPic.prototype =
         var str="";
         this.initThumbnails(childcount);
         this.wrap = typeof id === "string" ? document.getElementById(id) : id;
+        this.data=[];
         for(var j=0;j<childcount;j++){
-            str+="<li data-index=\""+j+"\"><img /></li>";
+            var obj={
+              pageIndex:j
+            };
+            this.data.push(obj);
+        }
+        for(var k=0;k<5;k++){
+            str+="<li data-flag="+k+"><img /></li>";
         }
         $(this.wrap).find("ul").html(str);
-        this.oUl = this.wrap.getElementsByTagName("ul")[0];
-        this.aLi = this.wrap.getElementsByTagName("li");
-        this.prev = this.wrap.getElementsByTagName("pre")[0];
-        this.next = this.wrap.getElementsByTagName("pre")[1];
+        this.oUl = $(this.wrap).find("ul")[0];
+        this.aLi = $(this.wrap).find("li");
+        this.prev =$(this.wrap).find("pre")[0];
+        this.next =$(this.wrap).find("pre")[1];
         this.timer = null;
         this.aSort = [];
         this.iCenter = 2;
@@ -34,7 +41,7 @@ ZoomPic.prototype =
             {width:267, height:398, top:75, left:774, zIndex:1}
         ];
         for (var i = 0; i < this.aLi.length; i++) this.aSort[i] = this.aLi[i];
-        this.aSort.unshift(this.aSort.pop());
+        this.data.unshift(this.data.pop());
         this.setUp();
         this.addEvent(this.prev, "click", this._doPrev);
         this.addEvent(this.next, "click", this._doNext);
@@ -57,12 +64,12 @@ ZoomPic.prototype =
     },
     doPrev : function ()
     {
-        this.aSort.unshift(this.aSort.pop());
+        this.data.unshift(this.data.pop());
         this.setUp()
     },
     doNext : function ()
     {
-        this.aSort.push(this.aSort.shift());
+        this.data.push(this.data.shift());
         this.setUp()
     },
     doImgClick : function ()
@@ -75,23 +82,22 @@ ZoomPic.prototype =
                 if($(this).data("scaleflag")){
                     $(this).data("scaleflag",false);
                 }
-                console.log(  $(this).data("index")+"click");
-                if (this.index > _this.iCenter)
+                var index= $(this).data("data").index;
+                if (index > _this.iCenter)
                 {
-                    for (var i = 0; i < this.index - _this.iCenter; i++) _this.aSort.push(_this.aSort.shift());
+                    for (var i = 0; i < index - _this.iCenter; i++) _this.data.push(_this.data.shift());
                     _this.setUp();
                 }
-                else if(this.index < _this.iCenter)
+                else if(index < _this.iCenter)
                 {
-                    for (var i = 0; i < _this.iCenter - this.index; i++) _this.aSort.unshift(_this.aSort.pop());
+                    for (var i = 0; i < _this.iCenter -index; i++) _this.data.unshift(_this.data.pop());
                     _this.setUp();
                 }
             }
         }
-        $(this.wrap).on("mouseenter","li[data-index] img",function(){
+        $(this.wrap).on("mouseenter","li img",function(){
             var parent=$(this).parent("li");
             parent.data("scaleflag",true);
-            console.log(parent.data("index")+"enter");
             if(parent[0].timer){
                 return;
             }
@@ -101,14 +107,13 @@ ZoomPic.prototype =
                 "margin-top":-parent.height()*0.04
             },250);
         });
-        $(this.wrap).on("mouseleave","li[data-index] img",function(){
+        $(this.wrap).on("mouseleave","li img",function(){
             var parent=$(this).parent("li");
             if(parent.data("scaleflag")){
                 parent.data("scaleflag",false);
             }else{
                 return;
             }
-            console.log(parent.data("index")+"leave");
             if(parent[0].timer){
                 return;
             }
@@ -118,69 +123,110 @@ ZoomPic.prototype =
             //$(this).animate({"width":"100%","height":"100%" },250);
         });
     },
+    hideItem:function(el){
+        this.css(el, "display", "none");
+        this.css(el, "width", 0);
+        this.css(el, "height", 0);
+        this.css(el, "top", 70);
+        this.css(el, "left", this.oUl.offsetWidth / 2);
+    },
     setUp : function ()
     {
         var _this = this;
         var i = 0;
-        for (i = 0; i < this.aSort.length; i++) this.oUl.appendChild(this.aSort[i]);
-        for (i = 0; i < this.aSort.length; i++)
+        //for (i = 0; i < this.aSort.length; i++) this.oUl.appendChild(this.aSort[i]);
+        var unVisibleItems=[];
+        var goIngVisibleItems=[];
+        var aSortData=[];
+        for(var j=0;j<5;j++){
+            var da=$(this.aSort[j]).data("data");
+            if(da){
+                var flag=false;
+                for(var s=0;s<5;s++){
+                    if(da.pageIndex==this.data[s].pageIndex){
+                        flag=true;
+                        break;
+                    }
+                }
+                if(flag){
+                    aSortData.push({da:da,aSortIndex:j});
+                }else{
+                    this.hideItem(this.aSort[j]);
+                    unVisibleItems.push(this.aSort[j]);
+                    $(this.aSort[j]).data("data",null);
+                }
+            }else{
+                unVisibleItems.push(this.aSort[j]);
+            }
+        }
+        for(i=0;i<5;i++){
+            flag=false;
+            for( j=0;j<aSortData.length;j++){
+                if( aSortData[j].da.pageIndex==this.data[i].pageIndex){
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag){
+                var item=unVisibleItems.shift();
+                goIngVisibleItems.push(item);
+                $(item).data("data",this.data[i]);
+            }else{
+                goIngVisibleItems.push(this.aSort[aSortData[j].aSortIndex]);
+            }
+        }
+        for (i = 0; i < this.data.length; i++)
         {
-            this.aSort[i].index = i;
+            this.data[i].index=i;
             if (i < 5)
             {
-                this.css(this.aSort[i], "display", "block");
-                var index= $(this.aSort[i]).data("index");
-                var image=$(this.aSort[i]).find("img")[0];
-                if(!image.src){
-                    $(this.aSort[i]).addClass(".loading");
+
+                this.css(goIngVisibleItems[i], "display", "block");
+                var index= this.data[i].pageIndex;
+                var image=$(goIngVisibleItems[i]).find("img")[0];
+                var src="src/zh/ppt/幻灯片"+(index+1)+".JPG";
+                if(!image.src||image.src.indexOf(src)){
+                    $(goIngVisibleItems[i]).addClass(".loading");
                     image.onload=function(){
                         $(this).closest(".loading").removeClass(".loading");
                     };
-                    image.src="src/zh/ppt/幻灯片"+(index+1)+".JPG";
+                    image.src=src;
                 }
                 $(image).stop().removeAttr("style");
-                this.doMove(this.aSort[i], this.options[i], function ()
+                this.doMove(goIngVisibleItems[i], this.options[i], function ()
                 {
-                    _this.doMove($(_this.aSort[_this.iCenter]).find("img")[0], {opacity:100}, function ()
+                    _this.doMove($(goIngVisibleItems[_this.iCenter]).find("img")[0], {opacity:1}, function ()
                     {
-                        _this.doMove($(_this.aSort[_this.iCenter]).find("img")[0], {opacity:100}, function ()
+                        _this.doMove($(goIngVisibleItems[_this.iCenter]).find("img")[0], {opacity:1}, function ()
                         {
-                           /* _this.aSort[_this.iCenter].onmouseover = function ()
-                            {
-                                _this.doMove(this.getElementsByTagName("div")[0], {bottom:0})
-                            };
-                            _this.aSort[_this.iCenter].onmouseout = function ()
-                            {
-                                _this.doMove(this.getElementsByTagName("div")[0], {bottom:-100})
-                            }*/
+                            /* _this.aSort[_this.iCenter].onmouseover = function ()
+                             {
+                             _this.doMove(this.getElementsByTagName("div")[0], {bottom:0})
+                             };
+                             _this.aSort[_this.iCenter].onmouseout = function ()
+                             {
+                             _this.doMove(this.getElementsByTagName("div")[0], {bottom:-100})
+                             }*/
                         })
                     })
                 });
-            }
-            else
-            {
-                this.css(this.aSort[i], "display", "none");
-                this.css(this.aSort[i], "width", 0);
-                this.css(this.aSort[i], "height", 0);
-                this.css(this.aSort[i], "top", 37);
-                this.css(this.aSort[i], "left", this.oUl.offsetWidth / 2)
-            }
-            if (i < this.iCenter || i > this.iCenter)
-            {
-                this.css($(this.aSort[i]).find("img")[0], "opacity", 100);
-                this.aSort[i].onmouseover = function ()
+                if (i < this.iCenter || i > this.iCenter)
                 {
-                    _this.doMove($(this).find("img")[0], {opacity:100})
-                };
-                this.aSort[i].onmouseout = function ()
+                    this.css($(goIngVisibleItems[i]).find("img")[0], "opacity", 1);
+                    goIngVisibleItems[i].onmouseover = function ()
+                    {
+                        _this.doMove($(this).find("img")[0], {opacity:1})
+                    };
+                    goIngVisibleItems[i].onmouseout = function ()
+                    {
+                        _this.doMove($(this).find("img")[0], {opacity:1})
+                    };
+                    goIngVisibleItems[i].onmouseout();
+                }
+                else
                 {
-                    _this.doMove($(this).find("img")[0], {opacity:100})
-                };
-                this.aSort[i].onmouseout();
-            }
-            else
-            {
-                this.aSort[i].onmouseover = this.aSort[i].onmouseout = null
+                    goIngVisibleItems[i].onmouseover = this.aSort[i].onmouseout = null
+                }
             }
         }
     },
@@ -196,22 +242,7 @@ ZoomPic.prototype =
         }
         else if (arguments.length == 3)
         {
-            switch (attr)
-            {
-                case "width":
-                case "height":
-                case "top":
-                case "left":
-                case "bottom":
-                    oElement.style[attr] = value + "px";
-                    break;
-                case "opacity" :
-                    $(oElement).css({'opacity': value / 100});
-                    break;
-                default :
-                    oElement.style[attr] = value;
-                    break
-            }
+            $(oElement).css(attr,value);
         }
     },
     goPage:function(pagenumber){
@@ -240,7 +271,7 @@ ZoomPic.prototype =
             for (var property in oAttr)
             {
                 var iCur = parseFloat(_this.css(oElement, property));
-                property == "opacity" && (iCur = parseInt(iCur.toFixed(2) * 100));
+                property == "opacity" && (iCur = parseInt(iCur.toFixed(2)));
                 var iSpeed = (oAttr[property] - iCur) / 5;
                 iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
 

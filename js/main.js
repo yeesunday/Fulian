@@ -26,3 +26,6 @@ function initView () {
     $('.panel').hide();
     $('#photoWallPanel').show();
 }
+$(function(){
+   initView();
+});
