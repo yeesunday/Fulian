@@ -4,10 +4,14 @@ function ZoomPic ()
 }
 ZoomPic.prototype =
 {
+    initThumbnails:function(childcount){
+        this.tbList = new ThumbnailsList(1,childcount);
+    },
     initialize : function (id,childcount)
     {
         var _this = this;
         var str="";
+        this.initThumbnails(childcount);
         this.wrap = typeof id === "string" ? document.getElementById(id) : id;
         for(var j=0;j<childcount;j++){
             str+="<li data-index=\""+j+"\"><img /></li>";
@@ -71,6 +75,7 @@ ZoomPic.prototype =
                 if($(this).data("scaleflag")){
                     $(this).data("scaleflag",false);
                 }
+                console.log(  $(this).data("index")+"click");
                 if (this.index > _this.iCenter)
                 {
                     for (var i = 0; i < this.index - _this.iCenter; i++) _this.aSort.push(_this.aSort.shift());
@@ -133,7 +138,7 @@ ZoomPic.prototype =
                     };
                     image.src="src/zh/ppt/幻灯片"+(index+1)+".JPG";
                 }
-                $(this.aSort[i]).find("img").stop().removeAttr("style");
+                $(image).stop().removeAttr("style");
                 this.doMove(this.aSort[i], this.options[i], function ()
                 {
                     _this.doMove($(_this.aSort[_this.iCenter]).find("img")[0], {opacity:100}, function ()
@@ -257,4 +262,110 @@ ZoomPic.prototype =
 window.onload = function ()
 {
     zoomPic= new ZoomPic("Index_Box",15);
+};
+function ThumbnailsList(itemnumber,totalNumber){
+    this.totalCount=totalNumber;
+    this.pagenumber=itemnumber;
+    this.pageCount=9;
+    this.itemWidh=106;
+    this.$con=$("#tbn");
+    this.$ul=this.$con.find("ul");
+    this.$next= this.$con.find(".button-next");
+    this.$previous= this.$con.find(".button-previous");
+    this.currentIndex=Math.floor(this.pagenumber/this.pageCount);
+    this.lastIndex=Math.floor(this.totalCount/this.pageCount);
+    this.initEvent();
+    this.$ul.width(this.itemWidh*18);
+    var $liList=this.$ul.find("img:lt(9)");
+    this.isOnRight=true;
+    for(var j=this.pagenumber;j<(this.pagenumber+9);j++){
+        var img=$liList[j-1];
+        img.src='src/zh/ppt/幻灯片'+j+'.JPG';
+        img.onload=function(){
+          $(this).parent("li").removeClass("loading");
+        };
+    }
+}
+ThumbnailsList.prototype={
+    initEvent:function(){
+        var _this=this;
+        this.$next.on("click",function(){
+            _this.next();
+        });
+        this.$previous.on("click",function(){
+            _this.previous();
+        });
+    },
+    next:function(){
+        if(this.currentIndex==this.lastIndex){
+            alert("已经是最后一页啦");
+            return;
+        }
+        if(this.$ul.is(":animated")){
+            return;
+        }
+        var _this=this;
+        var $lis;
+        if(this.isOnRight){
+            $lis=this.$ul.find("li:gt(8)");
+        }else{
+            $lis=this.$ul.find("li:lt(9)");
+            for(var i=0;i<9;i++){
+                this.$ul.append($lis[i]);
+            }
+        }
+        this.$ul.css("left",0);
+        this.isOnRight=false;
+        this.$ul.animate({
+            left:-this.pageCount*this.itemWidh
+        },1000,function(){
+            _this.currentIndex++;
+        });
+        var startPage=(_this.currentIndex+1)*this.pageCount;
+        for(var j=startPage;j<startPage+9;j++){
+            var img=$lis.eq(j-startPage).find("img")[0];
+            img.src="";
+            img.src='src/zh/ppt/幻灯片'+(j+1)+'.JPG';
+            $(img).parent("li").addClass("loading");
+            img.onload=function(){
+                $(this).parent("li").removeClass("loading");
+            };
+        }
+    },
+    previous:function(){
+        if(this.currentIndex==0){
+            alert("当前已经是第一页啦");
+            return;
+        }
+        if(this.$ul.is(":animated")){
+            return;
+        }
+        var _this=this;
+        var $lis;
+        if(this.isOnRight){
+            $lis=this.$ul.find("li:gt(8)");
+            for(var i=0;i<9;i++){
+                this.$ul.prepend($lis[i]);
+            }
+        }else{
+            $lis=this.$ul.find("li:lt(9)");
+        }
+        this.$ul.css("left",-this.pageCount*this.itemWidh);
+        this.isOnRight=true;
+        this.$ul.animate({
+            left:0
+        },1000,function(){
+            _this.currentIndex--;
+        });
+        var startPage=(_this.currentIndex-1)*this.pageCount;
+        for(var j=startPage;j<startPage+9;j++){
+            var img=$lis.eq(j-startPage).find("img")[0];
+            img.src="";
+            img.src='src/zh/ppt/幻灯片'+(j+1)+'.JPG';
+            $(img).parent("li").addClass("loading");
+            img.onload=function(){
+                $(this).parent("li").removeClass("loading");
+            };
+        }
+    }
 };

@@ -3,12 +3,12 @@ a,img{border:0;}
 body{font:12px/180% Arial, Helvetica, sans-serif, "ÐÂËÎÌå";}
 
 /* jswbox */
-#Index_Box{width:1050px;height:600px;  margin:50px 0 0px 19px;position:relative;}
+#Index_Box{width:1050px;height:600px;  margin:15px 0 0px 19px;position:relative;}
 #Index_Box ul{position:relative;height:600px;overflow:visible;}
 #Index_Box li{position:absolute;width:0;height:0;z-index:0;cursor:pointer;overflow:visible;top:152px;left:10px;text-align: center; }
 #Index_Box li img{width:100%;height:100%;vertical-align:top;float:left;}
-#Index_Box li.loading{
-    background:url(../img/loader.gif) center  no-repeat;
+#boardPanel .loading{
+    background:url(../img/TransparentLoading.gif) center  no-repeat;
 }
 #Index_Box .prev, #Index_Box .next{display:none;}
 .con{
@@ -18,4 +18,54 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "ÐÂËÎÌå";}
     width: 100%;
     height: 100%;
     line-height: 100%;
+}
+.navigator-content {
+    position:absolute;
+    bottom:10px;
+    right:10px;
+    background:url(../img/panels/transparent_bg.png) repeat;
+    padding:5px 0px;
+}
+.navigator-wrapper{
+    position:relative;
+    z-index:10;
+    height:106px;
+    width:956px;
+    overflow:hidden;
+    color:#FFF;
+    float:left
+}
+ul.navigator-wrap-inner{	top:0;	padding:0;	margin:0;	position:absolute;	width:1908px; }
+ul.navigator-wrap-inner li{ cursor:hand; 	cursor:pointer;	list-style:none;	padding:0;	margin-left:0px;	overflow:hidden;	float:left;	display:block;	text-align:center;}
+ul.navigator-wrap-inner li img{
+    border:#666 solid 3px;
+    width: 100px;
+    height: 100px;
+}
+ ul.navigator-wrap-inner li.active img,
+ ul.navigator-wrap-inner li:hover img {
+    border:#A8A8A8 solid 3px;
+    -moz-transition:border-color  ease-in-out 0.4s
+}
+ .navigator-content .button-next,
+ .navigator-content .button-previous{
+    display:block;
+    width:22px;
+    height:30px;
+    color:#FFF;
+    cursor:pointer;
+    margin-top: 36px;
+    overflow: hidden;
+}
+ .button-previous{
+    float:left;
+    text-indent:-999px;
+    margin-right:5px;
+    background:url(../img/panels/arrow-l.png) no-repeat right center;
+}
+.button-next {
+    float:left;
+    text-indent:-999px;
+    margin-left:5px;
+    background:url(../img/panels/arrow-r.png) no-repeat left center;
 }
