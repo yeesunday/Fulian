@@ -18,7 +18,7 @@
 .menu {
     position: absolute;
     left: 0px;
-    top: 143px;
+    top: 193px;
     width: 80px;
     height: 412px;
     /*background: rgba(255, 255, 255, 0.8);*/
@@ -56,6 +56,7 @@
     /*display: block;*/
     /*top: 120px;*/
     /*left: 200px;*/
+    left: 100px;
     position: absolute;
 }
 #photoWallPanel {
