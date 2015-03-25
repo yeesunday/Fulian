@@ -34,11 +34,11 @@ ZoomPic.prototype =
         this._doPrev = function () {return _this.doPrev.apply(_this)};
         this._doNext = function () {return _this.doNext.apply(_this)};
         this.options = [
-            {width:267, height:398, top:60, left:0, zIndex:1},
-            {width:318, height:474, top:30, left:130, zIndex:2},
-            {width:370, height:550, top:0, left:330, zIndex:3},
-            {width:318, height:474, top:30, left:582, zIndex:2},
-            {width:267, height:398, top:75, left:774, zIndex:1}
+            {width:300, height:410, top:42, left:0, zIndex:1},
+            {width:320, height:435, top:30, left:130, zIndex:2},
+            {width:370, height:505, top:0, left:330, zIndex:3},
+            {width:320, height:435, top:30, left:580, zIndex:2},
+            {width:300, height:410, top:42, left:730, zIndex:1}
         ];
         for (var i = 0; i < this.aLi.length; i++) this.aSort[i] = this.aLi[i];
         this.data.unshift(this.data.pop());
@@ -100,6 +100,21 @@ ZoomPic.prototype =
             parent.data("scaleflag",true);
             if(parent[0].timer){
                 return;
+            }
+            var displayIndex=$(this).parent().data("data");
+            var scator=1;
+            switch (displayIndex){
+                case 0:
+                case 4:
+                    scator=1.06;
+                    break;
+                case 1:
+                case 3:
+                    scator=1.06;
+                    break;
+                case 2:
+                    scator=1.19;
+                    break;
             }
             $(this).stop().animate({
                 "width":parent.width()*1.08,
@@ -189,9 +204,9 @@ ZoomPic.prototype =
                     continue;
                 }
                 if(!image.src||image.src.indexOf(src)){
-                    $(goIngVisibleItems[i]).addClass(".loading");
+                    $(goIngVisibleItems[i]).addClass("loading");
                     image.onload=function(){
-                        $(this).closest(".loading").removeClass(".loading");
+                        $(this).closest(".loading").removeClass("loading");
                     };
                     image.src=src;
                 }
@@ -204,11 +219,11 @@ ZoomPic.prototype =
                         {
                              _this.aSort[_this.iCenter].onmouseover = function ()
                              {
-                             _this.doMove(this.getElementsByTagName("div")[0], {bottom:0})
+                             //_this.doMove(this.getElementsByTagName("div")[0], {bottom:0})
                              };
                              _this.aSort[_this.iCenter].onmouseout = function ()
                              {
-                             _this.doMove(this.getElementsByTagName("div")[0], {bottom:-100})
+                             //_this.doMove(this.getElementsByTagName("div")[0], {bottom:-100})
                              }
                         })
                     })
@@ -274,7 +289,12 @@ ZoomPic.prototype =
     doMove : function (oElement, oAttr, fnCallBack)
     {
         var _this = this;
-        clearInterval(oElement.timer);
+        if(!oElement){
+            //console.log("出问题了");
+        }
+        if(typeof oElement!=="undefined"){
+            clearInterval(oElement.timer);
+        }
         oElement.timer = setInterval(function ()
         {
             var bStop = true;
@@ -416,12 +436,21 @@ ThumbnailsList.prototype={
     }
 };
 $(function(){
+   var $indexBox= $("#Index_Box");
+    var $tbn=$("#tbn");
     window.zoomPic = new ZoomPic("Index_Box",226);
     window.slider2=new accordion.Slider("slider2");
     window.slider2.init("slider2",0,"open");
     $(".zpmenu li").on("click",function(){
        var pageNum =$(this).attr("page");
         if(pageNum){
+            $("#tbn").show();
+            $indexBox.show();
+            var contentWidth=$indexBox.width();
+            var windowWidth=$(document).width();
+            var tbnWidth=$tbn.width();
+            $indexBox.offset({left:(windowWidth-contentWidth)/2});
+            $tbn.offset({left:(windowWidth-tbnWidth)/2});
             window.zoomPic.goPage(parseInt(pageNum));
             $(".zpmenu").animate({
                 width:0

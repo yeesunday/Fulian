@@ -12,7 +12,10 @@ $('#mPreface').click(function () {
 });
 $('#mCatalog').click(function () {
     showPanel('boardPanel');
-    $(".zpmenu").show().width(0).animate({
+    $("#tbn").hide();
+    $("#Index_Box").hide();
+    var of=$(this).offset();
+    $(".zpmenu").offset({top:of.top,left:of.left+100}).show().width(0).animate({
         width:958
         },500,function(){
     });
