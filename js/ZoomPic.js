@@ -204,9 +204,9 @@ ZoomPic.prototype =
                     continue;
                 }
                 if(!image.src||image.src.indexOf(src)){
-                    $(goIngVisibleItems[i]).addClass("loading");
+                    //$(goIngVisibleItems[i]).addClass("loading");
                     image.onload=function(){
-                        $(this).closest(".loading").removeClass("loading");
+                        //$(this).closest(".loading").removeClass("loading");
                     };
                     image.src=src;
                 }
@@ -428,6 +428,7 @@ ThumbnailsList.prototype={
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
             img.src='src/zh/ppt/幻灯片'+(j+1)+'.PNG';
+            $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             img.onload=function(){
                 $(this).parent("li").removeClass("loading");
