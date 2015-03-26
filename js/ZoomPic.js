@@ -103,7 +103,7 @@ ZoomPic.prototype =
             }
             var displayIndex=$(this).parent().data("data");
             var scator=1;
-            switch (displayIndex){
+            switch (displayIndex.index){
                 case 0:
                 case 4:
                     scator=1.06;
@@ -117,9 +117,9 @@ ZoomPic.prototype =
                     break;
             }
             $(this).stop().animate({
-                "width":parent.width()*1.08,
-                "height":parent.height()*1.08,
-                "margin-top":-parent.height()*0.04
+                "width":parent.width()*scator,
+                "height":parent.height()*scator,
+                "margin-top":-parent.height()*scator/2
             },250);
         });
         $(this.wrap).on("mouseleave","li img",function(){
