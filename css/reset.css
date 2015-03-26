@@ -539,5 +539,5 @@ a {
 body {
     /*background: #4A82BA;*/
     background: url("../img/body_bg.jpg");
-    background-size: contain;
+    background-size: cover;
 }
