@@ -135,7 +135,7 @@ ZoomPic.prototype =
             if(parent[0].timer){
                 return;
             }
-            $(this).stop().animate({"width":parent.width(),"height":parent.height(), "margin-top":0},250,function(){
+            $(this).stop().animate({"width":parent.width(),"height":parent.height(), "margin-top":0, "margin-left":0},250,function(){
                 $(this).attr("style","");
             });
             //$(this).animate({"width":"100%","height":"100%" },250);
