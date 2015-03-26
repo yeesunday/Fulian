@@ -116,10 +116,13 @@ ZoomPic.prototype =
                     scator=1.19;
                     break;
             }
+            var pw=parent.width();
+            var ph=parent.height();
             $(this).stop().animate({
-                "width":parent.width()*scator,
-                "height":parent.height()*scator,
-                "margin-top":-parent.height()*(scator-1)/2
+                "width":pw*scator,
+                "height":ph*scator,
+                "margin-top":-ph*(scator-1)/2,
+                "margin-left":-pw*(scator-1)/2
             },250);
         });
         $(this.wrap).on("mouseleave","li img",function(){
