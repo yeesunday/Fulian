@@ -119,7 +119,7 @@ ZoomPic.prototype =
             $(this).stop().animate({
                 "width":parent.width()*scator,
                 "height":parent.height()*scator,
-                "margin-top":-parent.height()*scator/2
+                "margin-top":-parent.height()*(scator-1)/2
             },250);
         });
         $(this.wrap).on("mouseleave","li img",function(){
