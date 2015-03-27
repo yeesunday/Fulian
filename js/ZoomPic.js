@@ -381,7 +381,7 @@ function ThumbnailsList(itemnumber,totalNumber){
     this.isOnRight=true;
     for(var j=this.pagenumber;j<(this.pagenumber+9);j++){
         var img=$liList[j-1];
-        img.src='src/zh/ppt/'+imagePrefix+j+'.JPG';
+        img.src='src/zh/ppt/'+imagePrefix+j+'.jpg';
         $(img).parent("li").data("pageNumber",(j)).addClass("loading");
         img.onload=function(){
           $(this).parent("li").removeClass("loading");
@@ -434,7 +434,7 @@ ThumbnailsList.prototype={
         for(var j=startPage;j<startPage+9;j++){
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
-            img.src='src/zh/ppt/'+imagePrefix+(j+1)+'.JPG';
+            img.src='src/zh/ppt/'+imagePrefix+(j+1)+'.jpg';
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").addClass("loading");
             img.onload=function(){
@@ -471,7 +471,7 @@ ThumbnailsList.prototype={
         for(var j=startPage;j<startPage+9;j++){
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
-            img.src='src/zh/ppt/'+imagePrefix+(j+1)+'.JPG';
+            img.src='src/zh/ppt/'+imagePrefix+(j+1)+'.jpg';
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             img.onload=function(){
