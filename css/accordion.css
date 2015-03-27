@@ -3,7 +3,7 @@
 .zpmenu a:hover{color:#3366cc;text-decoration:underline;}
 /* zpmenu */
 .zpmenu{border:#d8d7d8 1px solid;margin-top:20px;width:958px;display:inline;background:url(../img/accordion/zpmenu_bg.png) repeat-x;float:left;height:205px;overflow:hidden;position: absolute;bottom: 0px;left: 10px;
-z-index: 50;top:343px;}
+z-index: 50;top:255px;}
 .zpmenu dl{width:958px;float:left;height:204px;_width:962px}
 .zpmenu dt{width:64px;float:left;height:204px}
 .zpmenu dt img{width:64px;display:block;float:left;height:204px;cursor:pointer}
