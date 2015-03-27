@@ -1,6 +1,7 @@
 var pageCount=306;//幻灯片总张数
 var pageWidth=453;//中间图片放大时的宽
 var pageHeigh=604;//中间图片放大时的高
+var imagePrefix="紫色PPT-3-";//中间图片放大时的高
 var retio=pageWidth/pageHeigh;
 function ZoomPic ()
 {
@@ -224,7 +225,7 @@ ZoomPic.prototype =
                 }
                 $(goIngVisibleItems[i]).show();
                 var index= this.data[i].pageIndex;
-                var src=encodeURIComponent("src/zh/ppt/幻灯片"+(index+1)+".JPG");
+                var src=encodeURIComponent("src/zh/ppt/"+imagePrefix+(index+1)+".JPG");
                 if(!image){
                     continue;
                 }
@@ -380,7 +381,7 @@ function ThumbnailsList(itemnumber,totalNumber){
     this.isOnRight=true;
     for(var j=this.pagenumber;j<(this.pagenumber+9);j++){
         var img=$liList[j-1];
-        img.src='src/zh/ppt/幻灯片'+j+'.JPG';
+        img.src='src/zh/ppt/'+imagePrefix+j+'.JPG';
         $(img).parent("li").data("pageNumber",(j)).addClass("loading");
         img.onload=function(){
           $(this).parent("li").removeClass("loading");
@@ -433,7 +434,7 @@ ThumbnailsList.prototype={
         for(var j=startPage;j<startPage+9;j++){
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
-            img.src='src/zh/ppt/幻灯片'+(j+1)+'.JPG';
+            img.src='src/zh/ppt/'+imagePrefix+(j+1)+'.JPG';
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").addClass("loading");
             img.onload=function(){
@@ -470,7 +471,7 @@ ThumbnailsList.prototype={
         for(var j=startPage;j<startPage+9;j++){
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
-            img.src='src/zh/ppt/幻灯片'+(j+1)+'.JPG';
+            img.src='src/zh/ppt/'+imagePrefix+(j+1)+'.JPG';
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             img.onload=function(){
@@ -505,3 +506,4 @@ $(function(){
         }
     });
 });
+
