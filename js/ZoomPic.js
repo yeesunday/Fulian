@@ -225,7 +225,7 @@ ZoomPic.prototype =
                 }
                 $(goIngVisibleItems[i]).show();
                 var index= this.data[i].pageIndex;
-                var src=encodeURIComponent("src/zh/ppt/"+imagePrefix+(index+1)+".JPG");
+                var src=encodeURIComponent("src/zh/ppt/"+imagePrefix+(index+1)+".jpg");
                 if(!image){
                     continue;
                 }
