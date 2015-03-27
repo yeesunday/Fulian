@@ -1,3 +1,7 @@
+var pageCount=306;//幻灯片总张数
+var pageWidth=453;//中间图片放大时的宽
+var pageHeigh=604;//中间图片放大时的高
+var retio=pageWidth/pageHeigh;
 function ZoomPic ()
 {
     this.initialize.apply(this, arguments)
@@ -21,7 +25,7 @@ ZoomPic.prototype =
             this.data.push(obj);
         }
         for(var k=0;k<5;k++){
-            str+="<li data-flag="+k+"><img /></li>";
+            str+="<li data-flag="+k+"><img /><table class='loadingTable'><tr><td><img src='img/TransparentLoading.gif'></td></tr></table></li>";
         }
         $(this.wrap).find("ul").html(str);
         this.oUl = $(this.wrap).find("ul")[0];
@@ -33,14 +37,21 @@ ZoomPic.prototype =
         this.iCenter = 2;
         this._doPrev = function () {return _this.doPrev.apply(_this)};
         this._doNext = function () {return _this.doNext.apply(_this)};
-        this.options = [
-            {width:300, height:410, top:42, left:0, zIndex:1},
-            {width:320, height:435, top:30, left:130, zIndex:2},
-            {width:370, height:505, top:0, left:330, zIndex:3},
-            {width:320, height:435, top:30, left:580, zIndex:2},
-            {width:300, height:410, top:42, left:730, zIndex:1}
+       this.options = [
+            {height:0,width:300,top:42, left:0,  z:100},
+            {height:0,width:330,top:30, left:130,z:200},
+            {height:0,width:380,top:0, left:330, z:300},
+            {height:0,width:330,top:30, left:0,z:200},
+            {height:0,width:300,top:42, left:0,z:100}
         ];
-        for (var i = 0; i < this.aLi.length; i++) this.aSort[i] = this.aLi[i];
+       for(var ss=0;ss<this.options.length;ss++){
+           this.options[ss].height=parseInt(this.options[ss].width/retio);
+       }
+        this.options[3].left=2*(this.options[2].width/2+this.options[2].left)-(this.options[1].left+this.options[1].width);
+        this.options[4].left=2*(this.options[2].width/2+this.options[2].left)-(this.options[0].left+this.options[0].width);
+        for (var i = 0; i < this.aLi.length; i++) {
+            this.aSort[i] = this.aLi[i];
+        }
         this.data.unshift(this.data.pop());
         this.setUp();
         this.addEvent(this.prev, "click", this._doPrev);
@@ -96,6 +107,9 @@ ZoomPic.prototype =
             }
         }
         $(this.wrap).on("mouseenter","li img",function(){
+            if(this.isLoading){
+               return;
+            }
             var parent=$(this).parent("li");
             parent.data("scaleflag",true);
             if(parent[0].timer){
@@ -118,14 +132,18 @@ ZoomPic.prototype =
             }
             var pw=parent.width();
             var ph=parent.height();
-            $(this).stop().animate({
-                "width":pw*scator,
-                "height":ph*scator,
-                "margin-top":-ph*(scator-1)/2,
-                "margin-left":-pw*(scator-1)/2
-            },250);
+            var config={
+                "width":parseInt(displayIndex.index==2?pageWidth:pw*scator),
+                "height":parseInt(displayIndex.index==2?pageHeigh:ph*scator),
+                "margin-top":parseInt(-ph*(scator-1)/2),
+                "margin-left":parseInt(-pw*(scator-1)/2)
+            };
+            $(this).stop().animate(config,250);
         });
         $(this.wrap).on("mouseleave","li img",function(){
+            if(this.isLoading){
+                return;
+            }
             var parent=$(this).parent("li");
             if(parent.data("scaleflag")){
                 parent.data("scaleflag",false);
@@ -135,18 +153,19 @@ ZoomPic.prototype =
             if(parent[0].timer){
                 return;
             }
-            $(this).stop().animate({"width":parent.width(),"height":parent.height(), "margin-top":0, "margin-left":0},250,function(){
+            var config={"width":parent.width(),"height":parent.height(), "margin-top":0, "margin-left":0};
+            $(this).stop().animate(config,250,function(){
                 $(this).attr("style","");
             });
             //$(this).animate({"width":"100%","height":"100%" },250);
         });
     },
     hideItem:function(el){
-        this.css(el, "display", "none");
-        this.css(el, "width", 0);
-        this.css(el, "height", 0);
-        this.css(el, "top", 70);
-        this.css(el, "left", this.oUl.offsetWidth / 2);
+        $(el).css({
+            display:"none",
+            width:0,
+            left:this.oUl.offsetWidth / 2
+        });
     },
     setUp : function ()
     {
@@ -198,23 +217,44 @@ ZoomPic.prototype =
             this.data[i].index=i;
             if (i < 5)
             {
-
-                this.css(goIngVisibleItems[i], "display", "block");
-                var index= this.data[i].pageIndex;
                 var image=$(goIngVisibleItems[i]).find("img")[0];
-                var src=decodeURIComponent("src/zh/ppt/幻灯片"+(index+1)+".PNG");
+                if(!$(goIngVisibleItems[i]).is(":visible")){
+                    $(image).remove();
+                    image=$(goIngVisibleItems[i]).prepend("<img />").find("img")[0];
+                }
+                $(goIngVisibleItems[i]).show();
+                var index= this.data[i].pageIndex;
+                var src=encodeURIComponent("src/zh/ppt/幻灯片"+(index+1)+".JPG");
                 if(!image){
                     continue;
                 }
-                if(!image.src||image.src.indexOf(src)){
-                    //$(goIngVisibleItems[i]).addClass("loading");
+                if(!image.src||image.src.indexOf(src)==-1){
+                    $(goIngVisibleItems[i]).find(".loadingTable").show();
+                    image.isLoading=true;
                     image.onload=function(){
-                        //$(this).closest(".loading").removeClass("loading");
+                        this.isLoading=false;
+                        $(this).siblings(".loadingTable").hide();
                     };
                     image.src=src;
                 }
                 $(image).stop().removeAttr("style");
-                this.doMove(goIngVisibleItems[i], this.options[i], function ()
+                if(!goIngVisibleItems[i].zIndexObjecy){
+                    goIngVisibleItems[i].zIndexObjecy={
+                        z:this.options[i].z,
+                        parent: goIngVisibleItems[i]
+                    };
+                }
+                goIngVisibleItems[i].zIndexObjecy.z=parseInt($(goIngVisibleItems[i]).css('zIndex'));
+                $(goIngVisibleItems[i].zIndexObjecy).stop().animate({
+                    z:  this.options[i].z
+                }, {
+                    step: function() {
+                        this.parent.style.zIndex=~~this.z;
+                    },
+                    duration: 400
+                });
+                $(goIngVisibleItems[i]).stop().animate(this.options[i],400);
+     /*           this.doMove(goIngVisibleItems[i], this.options[i], function ()
                 {
                     _this.doMove($(goIngVisibleItems[_this.iCenter]).find("img")[0], {opacity:1}, function ()
                     {
@@ -230,8 +270,8 @@ ZoomPic.prototype =
                              }
                         })
                     })
-                });
-                if (i < this.iCenter || i > this.iCenter)
+                });*/
+          /*      if (i < this.iCenter || i > this.iCenter)
                 {
                     this.css($(goIngVisibleItems[i]).find("img")[0], "opacity", 1);
                     goIngVisibleItems[i].onmouseover = function ()
@@ -247,7 +287,7 @@ ZoomPic.prototype =
                 else
                 {
                     goIngVisibleItems[i].onmouseover = this.aSort[i].onmouseout = null
-                }
+                }*/
             }
         }
     },
@@ -340,7 +380,7 @@ function ThumbnailsList(itemnumber,totalNumber){
     this.isOnRight=true;
     for(var j=this.pagenumber;j<(this.pagenumber+9);j++){
         var img=$liList[j-1];
-        img.src='src/zh/ppt/幻灯片'+j+'.PNG';
+        img.src='src/zh/ppt/幻灯片'+j+'.JPG';
         $(img).parent("li").data("pageNumber",(j)).addClass("loading");
         img.onload=function(){
           $(this).parent("li").removeClass("loading");
@@ -393,7 +433,7 @@ ThumbnailsList.prototype={
         for(var j=startPage;j<startPage+9;j++){
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
-            img.src='src/zh/ppt/幻灯片'+(j+1)+'.PNG';
+            img.src='src/zh/ppt/幻灯片'+(j+1)+'.JPG';
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").addClass("loading");
             img.onload=function(){
@@ -430,7 +470,7 @@ ThumbnailsList.prototype={
         for(var j=startPage;j<startPage+9;j++){
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
-            img.src='src/zh/ppt/幻灯片'+(j+1)+'.PNG';
+            img.src='src/zh/ppt/幻灯片'+(j+1)+'.JPG';
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             img.onload=function(){
@@ -442,10 +482,11 @@ ThumbnailsList.prototype={
 $(function(){
    var $indexBox= $("#Index_Box");
     var $tbn=$("#tbn");
-    window.zoomPic = new ZoomPic("Index_Box",226);
+    window.zoomPic = new ZoomPic("Index_Box",pageCount);
     window.slider2=new accordion.Slider("slider2");
     window.slider2.init("slider2",0,"open");
-    $(".zpmenu li").on("click",function(){
+    $(".zpmenu li").on("click",function(e){
+        e.preventDefault();
        var pageNum =$(this).attr("page");
         if(pageNum){
             $("#tbn").show();
