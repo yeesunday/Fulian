@@ -39,11 +39,11 @@ ZoomPic.prototype =
         this._doPrev = function () {return _this.doPrev.apply(_this)};
         this._doNext = function () {return _this.doNext.apply(_this)};
        this.options = [
-            {height:0,width:300,top:42, left:0,  z:100},
-            {height:0,width:330,top:30, left:130,z:200},
+            {height:0,width:260,top:42, left:0,  z:100},
+            {height:0,width:300,top:30, left:130,z:200},
             {height:0,width:380,top:0, left:330, z:300},
-            {height:0,width:330,top:30, left:0,z:200},
-            {height:0,width:300,top:42, left:0,z:100}
+            {height:0,width:300,top:30, left:0,z:200},
+            {height:0,width:260,top:42, left:0,z:100}
         ];
        for(var ss=0;ss<this.options.length;ss++){
            this.options[ss].height=parseInt(this.options[ss].width/retio);

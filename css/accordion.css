@@ -12,5 +12,20 @@ div.zpmenu dl#slider2 dd div.zpinfor{padding:12px 20px 0 20px;width:406px;displa
 .zpmenu dd h1{width:403px;float:left;font-size:18px}
 .zpmenu dd span{display:inline-block;float:left;font-size:14px;margin-right:25px}
 .zpmenu dd h2{border-bottom:#b4b4b4 1px dashed;padding-bottom:5px;width:403px;display:inline;float:left;color:#9b0f0f;font-size:14px}
-.zpmenu dd ul{width:403px;float:left;height:100px;clear:both}
-.zpmenu dd ul li{line-height:24px;margin:0px 10px 0px 0px;display:inline;white-space:nowrap;float:left}
+.zpmenu dd ul{width:403px;float:left;height:130px;clear:both;overflow-y: scroll;overflow-x: hidden;}
+.zpmenu dd ul li{line-height:24px;margin:0px 10px 0px 0px;display:inline;white-space:normal;float:left}
+.zpmenu dd ul li.fm{
+    display:block ;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: 宋体;
+    float: none;
+}
+.zpmenu dd ul li.sm{
+    display:inline ;
+    font-weight: normal;
+    font-size: 12px;
+    font-family: 宋体;
+    float: none;
+    white-space: normal;
+}
