@@ -3,7 +3,7 @@
 #tbn{
     display: none;
 }
-#Index_Box{width:1042px;height:520px;  margin:0px 0 0px 0px;position:absolute;display: none;top:66px;overflow:visible;}
+#Index_Box{width:1042px;height:520px;  margin:0px 0 0px 0px;position:absolute;display: none;top:76px;overflow:visible;}
 #Index_Box ul{position:relative;height:520px;overflow:visible;}
 #Index_Box li{position:absolute;width:0;height:100%;z-index:0;cursor:pointer;overflow:visible !important;top:152px;left:10px;text-align: center; }
 #Index_Box li img{width:100%;vertical-align:top;float:left;}

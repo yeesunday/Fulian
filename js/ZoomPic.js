@@ -81,6 +81,9 @@ ZoomPic.prototype =
     },
     doNext : function ()
     {
+        if(this.data[this.iCenter].pageIndex==pageCount-1){
+            return;
+        }
         this.data.push(this.data.shift());
         this.setUp()
     },
@@ -252,9 +255,9 @@ ZoomPic.prototype =
                     step: function() {
                         this.parent.style.zIndex=~~this.z;
                     },
-                    duration: 400
+                    duration: 500
                 });
-                $(goIngVisibleItems[i]).stop().animate(this.options[i],400);
+                $(goIngVisibleItems[i]).stop().animate(this.options[i],500);
      /*           this.doMove(goIngVisibleItems[i], this.options[i], function ()
                 {
                     _this.doMove($(goIngVisibleItems[_this.iCenter]).find("img")[0], {opacity:1}, function ()
