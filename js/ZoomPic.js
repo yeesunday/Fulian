@@ -1,7 +1,7 @@
 var pageCount=306;//幻灯片总张数
 var pageWidth=453;//中间图片放大时的宽
 var pageHeigh=604;//中间图片放大时的高
-var imagePrefix="";//中间图片放大时的高
+var imagePrefix="Page ";//图片前缀
 var retio=pageWidth/pageHeigh;
 function ZoomPic ()
 {
@@ -225,7 +225,7 @@ ZoomPic.prototype =
                 }
                 $(goIngVisibleItems[i]).show();
                 var index= this.data[i].pageIndex;
-                var src=encodeURIComponent("src/zh/ppt/"+imagePrefix+(index+1)+".jpg");
+                var src=encodeURIComponent("src/zh/ppt/"+imagePrefix+addZero((index+1),3)+".png");
                 if(!image){
                     continue;
                 }
@@ -381,7 +381,7 @@ function ThumbnailsList(itemnumber,totalNumber){
     this.isOnRight=true;
     for(var j=this.pagenumber;j<(this.pagenumber+9);j++){
         var img=$liList[j-1];
-        img.src='src/zh/ppt/'+imagePrefix+j+'.jpg';
+        img.src='src/zh/ppt/'+imagePrefix+addZero(j,3)+'.png';
         $(img).parent("li").data("pageNumber",(j)).addClass("loading");
         img.onload=function(){
           $(this).parent("li").removeClass("loading");
@@ -434,7 +434,7 @@ ThumbnailsList.prototype={
         for(var j=startPage;j<startPage+9;j++){
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
-            img.src='src/zh/ppt/'+imagePrefix+(j+1)+'.jpg';
+            img.src='src/zh/ppt/'+imagePrefix+addZero((j+1),3)+'.png';
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").addClass("loading");
             img.onload=function(){
@@ -471,7 +471,7 @@ ThumbnailsList.prototype={
         for(var j=startPage;j<startPage+9;j++){
             var img=$lis.eq(j-startPage).find("img")[0];
             img.src="";
-            img.src='src/zh/ppt/'+imagePrefix+(j+1)+'.jpg';
+            img.src='src/zh/ppt/'+imagePrefix+addZero((j+1),3)+'.png';
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             $(img).parent("li").data("pageNumber",(j+1)).addClass("loading");
             img.onload=function(){
@@ -480,6 +480,10 @@ ThumbnailsList.prototype={
         }
     }
 };
+function addZero(str,length){
+    str+="";
+    return new Array(length - str.length + 1).join("0") + str;
+}
 $(function(){
    var $indexBox= $("#Index_Box");
     var $tbn=$("#tbn");
