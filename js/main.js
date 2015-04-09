@@ -11,18 +11,24 @@ $('#mPreface').click(function () {
     showPanel('prefacePanel');
 });
 $('#mCatalog').click(function () {
-    showPanel('boardPanel');
-    $("#tbn").hide();
-    $("#Index_Box").hide();
-    $(".zpmenu").show().width(0).animate({
-        width:958
-        },500,function(){
-    });
+    showAccordation();
 });
 $('#mBook').click(function () {
     showPanel('bookPanel');
 });
+$("#photoWallPanel p").on("mousedown",function(){
+    showAccordation();
+});
 
+function showAccordation() {
+    showPanel('boardPanel');
+    $("#tbn").hide();
+    $("#Index_Box").hide();
+    $(".zpmenu").show().width(0).animate({
+        width:894
+    },500,function(){
+    });
+}
 function showPanel (panel) {
     $('#' + panel).show().siblings().hide();
 }

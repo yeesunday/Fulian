@@ -510,6 +510,8 @@ $(function(){
             },500,function(){
                 $(this).hide();
             });
+        }else if($(this).attr("id")=="shuji"){
+            showPanel('bookPanel');
         }
     });
 });
