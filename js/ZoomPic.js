@@ -1,8 +1,9 @@
-var pageCount=326;//幻灯片总张数
+var pageCount=325;//幻灯片总张数
 var pageWidth=453;//中间图片放大时的宽
 var pageHeigh=604;//中间图片放大时的高
 var imagePrefix="Page ";//图片前缀
 var retio=pageWidth/pageHeigh;
+var startPageNumber=2;
 function ZoomPic ()
 {
     this.initialize.apply(this, arguments)
@@ -484,6 +485,7 @@ ThumbnailsList.prototype={
     }
 };
 function addZero(str,length){
+    str+=startPageNumber-1;
     str+="";
     return new Array(length - str.length + 1).join("0") + str;
 }
